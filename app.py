@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
 import librosa
 import pickle
@@ -8,6 +7,10 @@ from collections import Counter
 from scipy import signal
 from scipy.ndimage import maximum_filter
 
+# --- THE FIX: Force Matplotlib to run 'headless' ---
+import matplotlib
+matplotlib.use('Agg') 
+import matplotlib.pyplot as plt
 # ==========================================
 # 1. LOAD THE DATABASE (Only once)
 # ==========================================
@@ -112,13 +115,18 @@ with tab1:
     if single_file is not None:
         st.audio(single_file) 
         
-        with st.spinner("Analyzing audio fingerprint..."):
+       with st.spinner("Analyzing audio fingerprint..."):
             prediction, fig_spec, fig_hist = process_audio_and_match(single_file)
             st.success(f"**Match Found:** {prediction}")
             
+            # Display intermediate steps
             st.subheader("Intermediate Analysis")
             st.pyplot(fig_spec)
             st.pyplot(fig_hist)
+            
+            # --- THE FIX: Clear memory so the app doesn't crash on the next run ---
+            plt.close(fig_spec)
+            plt.close(fig_hist)
 
 # --- MODE 2: BATCH MODE ---
 with tab2:
