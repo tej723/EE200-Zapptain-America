@@ -24,8 +24,8 @@ song_database = load_db()
 # 2. CORE MATH FUNCTIONS
 # ==========================================
 def process_audio_and_match(audio_file):
-    # 1. Read Audio using librosa
-    audio, fs = librosa.load(audio_file, sr=22050, mono=True)
+    # 1. Read Audio using librosa (LIMIT TO 15 SECONDS TO PREVENT CRASH!)
+    audio, fs = librosa.load(audio_file, sr=22050, mono=True, duration=25)
 
     # 2. Compute Spectrogram
     standard_window = 1024
