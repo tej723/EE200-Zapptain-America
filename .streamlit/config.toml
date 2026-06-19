@@ -1,0 +1,15 @@
+[theme]
+# A cool neon cyan/green accent color
+primaryColor = "#00E5FF" 
+
+# Deep dark background for that premium app feel
+backgroundColor = "#0E1117" 
+
+# Slightly lighter background for the sidebars and tabs
+secondaryBackgroundColor = "#262730" 
+
+# Crisp white text
+textColor = "#FAFAFA" 
+
+# Clean, modern font
+font = "sans serif"
