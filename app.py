@@ -119,7 +119,7 @@ with tab1:
     if single_file is not None:
         st.audio(single_file) 
         
-  with st.spinner("Analyzing audio fingerprint..."):
+        with st.spinner("Analyzing audio fingerprint..."):
             prediction, fig_spec, fig_hist = process_audio_and_match(single_file)
             
             # Use a massive success banner for the winner
@@ -134,7 +134,7 @@ with tab1:
             # Clear memory
             plt.close(fig_spec)
             plt.close(fig_hist)
-
+            
 # --- MODE 2: BATCH MODE ---
 with tab2:
     st.header("Batch Process Multiple Clips")
