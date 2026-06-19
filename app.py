@@ -11,6 +11,10 @@ from scipy.ndimage import maximum_filter
 import matplotlib
 matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
+
+# --- ADD THIS RIGHT HERE ---
+st.set_page_config(page_title="Zapp 'tain America", page_icon="🎶", layout="centered")
+
 # ==========================================
 # 1. LOAD THE DATABASE (Only once)
 # ==========================================
@@ -115,16 +119,19 @@ with tab1:
     if single_file is not None:
         st.audio(single_file) 
         
-        with st.spinner("Analyzing audio fingerprint..."):
+  with st.spinner("Analyzing audio fingerprint..."):
             prediction, fig_spec, fig_hist = process_audio_and_match(single_file)
-            st.success(f"**Match Found:** {prediction}")
             
-            # Display intermediate steps
-            st.subheader("Intermediate Analysis")
-            st.pyplot(fig_spec)
-            st.pyplot(fig_hist)
+            # Use a massive success banner for the winner
+            st.success(f"🎉 **Match Found:** {prediction}")
             
-            # --- THE FIX: Clear memory so the app doesn't crash on the next run ---
+            # --- THE UI UPGRADE: Hide graphs in a dropdown ---
+            with st.expander("🔬 View the Mathematical Fingerprint"):
+                st.write("Here is the Spectrogram and Time-Offset data the algorithm used to find the match:")
+                st.pyplot(fig_spec)
+                st.pyplot(fig_hist)
+            
+            # Clear memory
             plt.close(fig_spec)
             plt.close(fig_hist)
 
