@@ -115,7 +115,7 @@ with tab1:
     if single_file is not None:
         st.audio(single_file) 
         
-       with st.spinner("Analyzing audio fingerprint..."):
+        with st.spinner("Analyzing audio fingerprint..."):
             prediction, fig_spec, fig_hist = process_audio_and_match(single_file)
             st.success(f"**Match Found:** {prediction}")
             
