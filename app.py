@@ -102,17 +102,31 @@ def process_audio_and_match(audio_file):
     ax2.set_ylabel("Number of Matches")
 
     return predicted_song_name, fig_spectrogram, fig_histogram
-
 # ==========================================
 # 3. THE WEB APP INTERFACE (STREAMLIT)
 # ==========================================
-st.title("🎶 Zapp 'tain America - Magical Mystery Tune")
+st.title("⚡ Zapp 'tain America - Magical Mystery Tune")
 st.write("Upload an audio clip to identify the song!")
+
+# --- OPTIONAL: Display the database contents on the UI ---
+with st.expander("📚 View Song Database"):
+    st.write("This app recognizes the following songs:")
+    # Extract unique song names from your database dictionary
+    all_songs = set()
+    for song_list in song_database.values():
+        for song_name, _ in song_list:
+            all_songs.add(song_name)
+    
+    # Display them nicely
+    for song in sorted(list(all_songs)):
+        st.write(f"- {song}")
+# ---------------------------------------------------------
 
 tab1, tab2 = st.tabs(["Single-Clip Mode", "Batch Mode"])
 
 # --- MODE 1: SINGLE-CLIP MODE ---
 with tab1:
+# ... (the rest of your code continues normally)
     st.header("Identify a Single Song")
     single_file = st.file_uploader("Upload a query clip", type=["wav", "mp3"], key="single")
     
